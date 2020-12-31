@@ -23,6 +23,8 @@ from detectron2.data import MetadataCatalog, build_detection_train_loader
 from detectron2.engine import AutogradProfiler, DefaultTrainer, default_argument_parser, default_setup, launch
 from detectron2.evaluation import COCOEvaluator, verify_results
 from detectron2.solver.build import maybe_add_gradient_clipping
+from detectron2.data.datasets.animation_face import get_face_dicts, get_face_test_dicts
+from detectron2.data import MetadataCatalog, DatasetCatalog
 
 from sparsercnn import SparseRCNNDatasetMapper, add_sparsercnn_config
 
@@ -113,6 +115,12 @@ def setup(args):
 
 
 def main(args):
+    DatasetCatalog.register("face_train", lambda: get_face_dicts("/data/animation_face/trainset"))
+    MetadataCatalog.get("face_train").set(thing_classes=["face"])
+    DatasetCatalog.register("face_eval", lambda: get_face_dicts("/data/animation_face/trainset", eval=True))
+    MetadataCatalog.get("face_eval").set(thing_classes=["face"])
+    DatasetCatalog.register("face_test", lambda: get_face_test_dicts("/data/animation_face/testset"))
+    MetadataCatalog.get("face_test").set(thing_classes=["face"])
     cfg = setup(args)
 
     if args.eval_only:

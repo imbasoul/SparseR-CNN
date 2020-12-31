@@ -1,3 +1,21 @@
+## Sparse R-CNN for animation face detection
+
+- Put your catoon dataset or soft link in /data/animation_face
+- Run this for training
+
+```
+python3 ./projects/SparseRCNN/train_net.py --num-gpus 8     
+--config-file ./projects/SparseRCNN/configs/sparsercnn.res101.300pro.3x.face.yaml 
+```
+
+- Run this for eval
+
+```
+python3 ./projects/SparseRCNN/train_net.py --num-gpus 8     
+--config-file ./projects/SparseRCNN/configs/sparsercnn.res101.300pro.3x.face.yaml 
+--eval-only MODEL.WEIGHTS /path-to-trained-model
+```
+
 ## Sparse R-CNN: End-to-End Object Detection with Learnable Proposals
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

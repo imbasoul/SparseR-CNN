@@ -1,0 +1,21 @@
+_BASE_: "Base-SparseRCNN.yaml"
+MODEL:
+  WEIGHTS: "/data/torchvision-R-101.pkl"
+  RESNETS:
+    DEPTH: 101
+    STRIDE_IN_1X1: False
+  SparseRCNN:
+    NUM_PROPOSALS: 300
+    NUM_CLASSES: 1
+DATASETS:
+  TRAIN: ("face_train",)
+  TEST:  ("face_test",)
+SOLVER:
+  STEPS: (140000, 170000)
+  MAX_ITER: 180000
+INPUT:
+  CROP:
+    ENABLED: True
+  FORMAT: "RGB"
+TEST:
+  EVAL_PERIOD: 7330
